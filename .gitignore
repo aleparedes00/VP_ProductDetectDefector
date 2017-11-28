@@ -53,8 +53,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# vsc.xml
+# kenygia add-it 
 .idea/vcs.xml
+.idea/modules.xml
+.idea/misc.xml
 
 # C extensions
 *.so

@@ -156,4 +156,4 @@ ENV/
 .mypy_cache/
 
 # data json
-data/**.json
+data/**/*.json

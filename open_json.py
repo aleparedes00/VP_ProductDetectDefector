@@ -3,8 +3,6 @@ from pprint import pprint
 import os
 import json
 
-root = './data/'
-
 def json_path(root):
     ext = '.json'
     list_json_data = []
@@ -21,8 +19,3 @@ def open_json_array(list_data):
     for json_path in list_data:
         print(json.load(open(json_path)))
 pass
-
-
-list_data = json_path(root)
-
-open_json_array(list_data)

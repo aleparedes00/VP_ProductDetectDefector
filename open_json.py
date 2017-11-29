@@ -10,7 +10,7 @@ def json_path(root):
     list_json_data = []
     for file in os.listdir(root):
         if file.endswith(ext):
-            list_json_data.append(json.load(open(os.path.join(root, file))))
+            list_json_data.append(os.path.join(root, file))
         else:
             print('file not json')
     return list_json_data
@@ -19,7 +19,7 @@ pass
 
 def open_json_array(list_data):
     for json_path in list_data:
-        pprint(json.load(open(json_path)))
+        print(json.load(open(json_path)))
 pass
 
 

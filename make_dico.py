@@ -36,8 +36,11 @@ def make_dico_target_last(path):
     file = open(path, encoding='utf-8').read()
     json_file = json.loads(file)['fts']
     for i in range(0, len(json_file)):
-        j = len(json_file[i]['classification'])
+        j = len(json_file[i]['classification']) - 1
         dico[json_file[i]['classification'][j]['id']] =  json_file[i]['classification'][j]['text']
     pass
     return dico
 pass
+
+print(make_dico_target('./data/ASH16.json'))
+print(make_dico_target_last('./data/ASH16.json'))

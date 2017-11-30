@@ -38,16 +38,6 @@ def make_test_data(json_file):
     json_data = open(json_file, encoding='utf-8').read()
     data = json.loads(json_data)['fts']
 
-    # Test d'affichage de la liste des attributs (première ligne uniquement)
-    # Décommentez si vous voulez tester
-    # for i in range(len(data[0]['attributes'])):
-    #     att = data[0]['attributes'][i][mode]
-    #     if data[0]['attributes'][i]['value'] is not None and data[0]['attributes'][i]['value'][mode] is not None:
-    #         val = data[0]['attributes'][i]['value'][mode]
-    #     else:
-    #         val = ""
-    #     print(att + " : " + val)
-
     # Construction de la liste des attributs et targets
     l_features = []
     l_targets = []
@@ -74,15 +64,10 @@ def make_test_data(json_file):
             else:
                 val = default
             l_test[i - limit].append(val)
-            print()
+        last_class_col = len(data[i]['classification']) - 1
         l_check.append(data[i]['classification'][last_class_col][mode])
 
-    # print("features: " + str(l_features))
+    # Uniformisation des listes (pour que les lignes aient toutes la même longueur)
     l_features, l_test = uniformise_features(l_features, l_test)
-    # print("features (fixed): " + str(l_features))
-    # print("targets: " + str(l_targets))
-    # print(l_test)
-    # print(l_check)
-    return l_features, l_targets, l_test, l_check
 
-make_test_data('data/MANOUSH4.json')
+    return l_features, l_targets, l_test, l_check

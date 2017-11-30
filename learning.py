@@ -54,6 +54,7 @@ for i in range(len(eval_features)):
     if answer != check:
         print("Je pense que ce produit a pour catégorie... " + class_dict[answer])
         print("Le produit est en réalité dans la catégorie... " + class_dict[check])
+        print("Le objet est l'id =" + eval_info[i]['id'] + "dans le fichier " + eval_info[i]['file'] + "\n")
         print("\033[91mERROR\033[0m\n")
         nb_error = nb_error + 1
 

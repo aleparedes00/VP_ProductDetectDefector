@@ -13,17 +13,16 @@ percentage = 1
 
 
 # Uniformise une liste si toutes les lignes n'ont pas le même nombre de cases
-def uniformise_features(features, eval_features, size=None):
+def uniformise_features(features, eval_features):
 
     # Obtenir la taille maximum si pas définie en paramètre
-    if size is None:
-        size = len(features[0])
-        for i in range(1, len(features)):
-            if size < len(features[i]):
-                size = len(features[i])
-        for i in range(1, len(eval_features)):
-            if size < len(eval_features[i]):
-                size = len(eval_features[i])
+    size = len(features[0])
+    for i in range(1, len(features)):
+        if size < len(features[i]):
+            size = len(features[i])
+    for i in range(1, len(eval_features)):
+        if size < len(eval_features[i]):
+            size = len(eval_features[i])
 
     # Remplir les lignes trop courtes
     for i in range(len(features)):

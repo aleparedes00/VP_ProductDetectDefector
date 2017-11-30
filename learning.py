@@ -11,9 +11,11 @@ json_files = json_path('data')
 for file in json_files:
 
     # Construction des listes de données
+    # TODO: modifier cette partie du code pour construire UNE seule liste commune combinant les données de TOUS les fichiers, pour les 4 types de liste.
     features, targets, test_data, check_data = make_test_data(file)
 
     # Construction du dictionnaire des classifications
+    # TODO: même chose que pour les listes de données, un seul dictionnaire commun.
     class_dict = make_dico(file)
 
     # Construction de l'arbre de décision
@@ -27,4 +29,5 @@ for file in json_files:
         print("Je pense que ce produit a pour catégorie... " + class_dict[answer])
         print("Le produit est en réalité dans la catégorie... " + class_dict[check])
         if answer != check:
+            # TODO: intercepter les erreurs et calculer le pourcentage de précision de la machine.
             print("\033[91mERROR\033[0m")

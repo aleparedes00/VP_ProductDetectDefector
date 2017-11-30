@@ -41,6 +41,3 @@ def make_dico_target_last(path):
     pass
     return dico
 pass
-
-print(make_dico_target('./data/ASH16.json'))
-print(make_dico_target_last('./data/ASH16.json'))

@@ -71,7 +71,6 @@ def make_test_data(json_file):
             l_features[i].append(val)
         last_class_col = len(data[r]['classification']) - 1
         l_targets.append(data[r]['classification'][last_class_col][mode])
-        print(added_values)
 
     # Construction des données de test
     l_test = []
@@ -80,7 +79,6 @@ def make_test_data(json_file):
     for i in range(limit, len(data)):
         l_test.append([])
         r = get_value(i, limit, len(data), added_values)
-        print(r)
         for j in range(len(data[r]['attributes'])):
             if data[r]['attributes'][j]['value'] is not None and data[r]['attributes'][j]['value'][mode] is not None:
                 val = data[r]['attributes'][j]['value'][mode]
@@ -89,8 +87,5 @@ def make_test_data(json_file):
             l_test[i - limit].append(val)
         last_class_col = len(data[r]['classification']) - 1
         l_check.append(data[r]['classification'][last_class_col][mode])
-
-    # Uniformisation des listes (pour que les lignes aient toutes la même longueur)
-    l_features, l_test = uniformise_features(l_features, l_test)
 
     return l_features, l_targets, l_test, l_check

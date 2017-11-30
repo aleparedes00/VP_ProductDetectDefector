@@ -17,12 +17,10 @@ json_files = json_path('data')
 for file in json_files:
 
     # Construction des listes de données
-    # TODO: modifier cette partie du code pour construire UNE seule liste commune combinant les données de TOUS les fichiers, pour les 4 types de liste.
     tmp_features, tmp_targets, tmp_test_data, tmp_check_data = make_test_data(file)
 
 
     # Construction du dictionnaire des classifications
-    # TODO: même chose que pour les listes de données, un seul dictionnaire commun.
     tmp_class_dict = make_dico(file)
 
     # update des liste de donnée global
@@ -31,7 +29,10 @@ for file in json_files:
     test_data.extend(tmp_test_data)
     check_data.extend(tmp_check_data)
     class_dict.update(tmp_class_dict)
+
+# Uniformisation des listes (pour que les lignes aient toutes la même longueur)
 features, test_data = uniformise_features(features, test_data)
+
 # Construction de l'arbre de décision
 clf = tree.DecisionTreeClassifier()
 clf = clf.fit(features, targets)

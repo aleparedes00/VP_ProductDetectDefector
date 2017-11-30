@@ -8,7 +8,7 @@ import random
 mode = "id"
 # Valeur par défaut. Les cases vides (null) de la table seront remplacées par cette valeur
 default = -1
-
+percentage = 0.8
 # Uniformise une liste si toutes les lignes n'ont pas le même nombre de cases
 def uniformise_features(fts, test):
 
@@ -58,7 +58,7 @@ def make_test_data(json_file):
     # Construction de la liste des attributs et targets
     l_features = []
     l_targets = []
-    limit = int(0.8 * len(data))
+    limit = int(percentage * len(data))
     added_values = []
     for i in range(limit):
         l_features.append([])

@@ -65,9 +65,10 @@ def get_data(json_file):
 def make_training_data(json_file):
 
     data = get_data(json_file)
-    # Construction de la liste des attributs et targets
+    # Construction de la liste des attributs et targets AP adding the id of the product
     l_features = []
     l_targets = []
+    l_info = []
     limit = int(percentage * len(data))
     added_values = []
     for i in range(limit):
@@ -81,6 +82,10 @@ def make_training_data(json_file):
             l_features[i].append(val)
         last_class_col = len(data[r]['classification']) - 1
         l_targets.append(data[r]['classification'][last_class_col][mode])
+        product_info = dict()
+        product_info['id'] = data[r]['id']
+        product_info['file'] = data[r]['operationCode']
+        l_info.append(product_info)
 
     return l_features, l_targets
 

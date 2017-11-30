@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from open_json import json_path
-from pprint import pprint
 import json
 
 """

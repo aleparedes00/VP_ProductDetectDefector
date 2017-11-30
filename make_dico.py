@@ -4,7 +4,7 @@ from open_json import json_path
 import json
 
 """
-faire un dictionner qui lit chaque ID a un TEXT a partir de fichier json
+faire un dictionnaire qui lit chaque ID a un TEXT a partir de fichier json
 
 """
 def make_dico_target(path):

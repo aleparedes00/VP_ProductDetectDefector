@@ -21,7 +21,7 @@ for file in json_files:
 
 
     # Construction du dictionnaire des classifications
-    tmp_class_dict = make_dico(file)
+    tmp_class_dict = make_dico_target(file)
 
     # update des liste de donnée global
     features.extend(tmp_features)
@@ -41,8 +41,9 @@ clf = clf.fit(features, targets)
 for i in range(len(test_data)):
     answer = clf.predict([test_data[i]])[0]
     check = check_data[i]
-    print("Je pense que ce produit a pour catégorie... " + class_dict[answer])
-    print("Le produit est en réalité dans la catégorie... " + class_dict[check])
     if answer != check:
+        print("Je pense que ce produit a pour catégorie... " + class_dict[answer])
+        print("Le produit est en réalité dans la catégorie... " + class_dict[check])
         # TODO: intercepter les erreurs et calculer le pourcentage de précision de la machine.
         print("\033[91mERROR\033[0m")
+        print("")

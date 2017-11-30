@@ -8,8 +8,7 @@ faire un dictionner qui lit chaque ID a un TEXT a partir de fichier json
 
 """
 def make_dico(path):
-    col = ('id', 'text')
-    dico = dict.fromkeys(col)
+    dico = dict()
     file = open(path, encoding='utf-8').read()
     json_file = json.loads(file)['fts']
     for i in range(0, len(json_file)):

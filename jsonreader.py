@@ -39,6 +39,7 @@ def make_test_data(json_file):
     data = json.loads(json_data)['fts']
 
     # Construction de la liste des attributs et targets
+    # TODO: les données sont construites en mode 80 premiers % / 20 derniers %. Idéalement, il faudrait revoir cette fonction pour qu'il garde le ratio mais sélectionne les entrées AU HASARD.
     l_features = []
     l_targets = []
     limit = int(0.8 * len(data))

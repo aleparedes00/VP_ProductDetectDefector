@@ -66,5 +66,7 @@ if len(eval_features) > 0:
 
 # Sauvegarde du modèle
 else:
-    pickle.dump(model, open('ProductDefectDetector.sav', 'wb'))
-    print("Modèle sauvegardé: ProductDefectDetector.sav")
+    pickle.dump(features, open('model/features.sav', 'wb'))
+    pickle.dump(targets, open('model/targets.sav', 'wb'))
+    pickle.dump(class_dict, open('model/class_dict.sav', 'wb'))
+    print("Modèle sauvegardé.")

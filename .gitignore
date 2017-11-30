@@ -160,3 +160,4 @@ ENV/
 
 # data json
 data*/**/*.json
+eval/**/*.json

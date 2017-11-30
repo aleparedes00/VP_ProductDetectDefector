@@ -9,30 +9,31 @@ mode = "id"
 # Valeur par défaut. Les cases vides (null) de la table seront remplacées par cette valeur
 default = -1
 # AP this represent the percentage of the data we'll take for the training step
-percentage = 0.8
+percentage = 1
 
 
 # Uniformise une liste si toutes les lignes n'ont pas le même nombre de cases
-def uniformise_features(fts, test):
+def uniformise_features(features, eval_features, size=None):
 
-    # Obtenir la taille maximum
-    size = len(fts[0])
-    for i in range(1, len(fts)):
-        if size < len(fts[i]):
-            size = len(fts[i])
-    for i in range(1, len(test)):
-        if size < len(test[i]):
-            size = len(test[i])
+    # Obtenir la taille maximum si pas définie en paramètre
+    if size is None:
+        size = len(features[0])
+        for i in range(1, len(features)):
+            if size < len(features[i]):
+                size = len(features[i])
+        for i in range(1, len(eval_features)):
+            if size < len(eval_features[i]):
+                size = len(eval_features[i])
 
     # Remplir les lignes trop courtes
-    for i in range(len(fts)):
-        while len(fts[i]) < size:
-            fts[i].append(default)
-    for i in range(len(test)):
-        while len(test[i]) < size:
-            test[i].append(default)
+    for i in range(len(features)):
+        while len(features[i]) < size:
+            features[i].append(default)
+    for i in range(len(eval_features)):
+        while len(eval_features[i]) < size:
+            eval_features[i].append(default)
 
-    return fts, test
+    return features, eval_features
 
 
 # Retourne un indice aléatoire dans la liste
@@ -62,7 +63,7 @@ def get_data(json_file):
 
 # Crée les données d'apprentissage et de test à partir d'un JSON donné
 # AP Function called make_test_data before. Now will only create the training data
-def make_training_data(json_file):
+def make_data(json_file):
 
     data = get_data(json_file)
     # Construction de la liste des attributs et targets AP adding the id of the product
@@ -87,10 +88,11 @@ def make_training_data(json_file):
         product_info['file'] = data[r]['operationCode']
         l_info.append(product_info)
 
-    return l_features, l_targets
+    return l_features, l_targets, l_info
 
 
 # AP Divide make_test_data in a second fc to separate test data and training data
+# Note: only for debug/dev
 def make_test_data(json_file):
 
     data = get_data(json_file)
@@ -99,6 +101,7 @@ def make_test_data(json_file):
     l_test_features = []
     l_test_targets = []
     added_values = []
+    l_info = []
     for i in range(limit, len(data)):
         l_test_features.append([])
         r = get_value(i, limit, len(data), added_values)
@@ -110,5 +113,9 @@ def make_test_data(json_file):
             l_test_features[i - limit].append(val)
         last_class_col = len(data[r]['classification']) - 1
         l_test_targets.append(data[r]['classification'][last_class_col][mode])
+        product_info = dict()
+        product_info['id'] = data[r]['id']
+        product_info['file'] = data[r]['operationCode']
+        l_info.append(product_info)
 
-    return l_test_features, l_test_targets
+    return l_test_features, l_test_targets, l_info

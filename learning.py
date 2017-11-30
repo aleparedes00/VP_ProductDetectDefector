@@ -7,43 +7,57 @@ from sklearn import tree
 # initialistion liste de données global
 features = []
 targets = []
-test_data = []
-check_data = []
+eval_features = []
+eval_targets = []
+eval_info = []
+
+# Chargement du modèle sauvegardé
+# TODO...
+
+# Chargement du dictionnaire sauvegardé
+# TODO...
 class_dict = dict()
 
-# Chargement de la liste des fichiers
-json_files = json_path('data')
+# Chargement de la liste des nouveaux fichiers référence (dossier data)
+json_files = json_path('data2')
 
 # Parcours des fichiers
 for file in json_files:
 
     # Construction des listes de données
-    tmp_features, tmp_targets = make_training_data(file)
-    tmp_test_data, tmp_check_data = make_test_data(file)
+    tmp_features, tmp_targets, tmp_info = make_data(file)
+    # Debug/dev mode: décommenter pour créer les listes d'évaluation à partir des mêmes fichiers
+    # Note: penser à changer la valeur de percentage dans jsonreader.py (ex: 0.8 pour un ratio 80-20)
+    # tmp_eval_features, tmp_eval_targets, tmp_eval_info = make_eval_features(file)
 
     # Construction du dictionnaire des classifications
-    tmp_class_dict = make_dico_target(file)
+    tmp_class_dict = make_dico_target_last(file)
 
     # update des liste de donnée global
     features.extend(tmp_features)
     targets.extend(tmp_targets)
-    test_data.extend(tmp_test_data)
-    check_data.extend(tmp_check_data)
+    # Décommenter si debug/dev mode
+    # eval_features.extend(tmp_eval_features)
+    # eval_targets.extend(tmp_eval_targets)
     class_dict.update(tmp_class_dict)
 
 # Uniformisation des listes (pour que les lignes aient toutes la même longueur)
-features, test_data = uniformise_features(features, test_data)
+# TODO... Récupérer la taille max de ma liste précédente (sauvegardée)
+features, eval_features = uniformise_features(features, eval_features) #indiquer la taille en paramètre
+# TODO... Uniformiser aussi LA LISTE PRÉCÉDENTE !
+
 
 # Construction de l'arbre de décision
 clf = tree.DecisionTreeClassifier()
 clf = clf.fit(features, targets)
+print(clf.get_params)
 
 nb_error = 0
 
 # Évaluation des données de test
-for i in range(len(test_data)):
-    answer = clf.predict([test_data[i]])[0]
-    check = check_data[i]
+for i in range(len(eval_features)):
+    answer = clf.predict([eval_features[i]])[0]
+    check = eval_targets[i]
     if answer != check:
         print("Je pense que ce produit a pour catégorie... " + class_dict[answer])
         print("Le produit est en réalité dans la catégorie... " + class_dict[check])
@@ -52,6 +66,7 @@ for i in range(len(test_data)):
         nb_error = nb_error + 1
 
 # Pourcentage de précision de la machine
-raw_precision = ((len(test_data) - nb_error) / len(test_data))*100
+raw_precision = ((len(eval_features) - nb_error) / len(eval_features))*100
 precision = format(raw_precision, '.2f')
 print("Le pourcentage de précision est de \033[92m" + str(precision) + "%.\033[0m")
+print("Nombre d'erreurs : " + str(nb_error))

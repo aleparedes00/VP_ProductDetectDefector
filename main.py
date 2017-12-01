@@ -6,7 +6,9 @@ import pickle
 import os
 from sklearn import tree
 
-if os.path.isdir('eval'):
+eval_root = 'eval'
+
+if os.path.isdir(eval_root):
     try:
         # AP creating all list for features, targets and info that will be submit at test
         features = pickle.load(open('model/features.sav', 'rb'))
@@ -16,7 +18,7 @@ if os.path.isdir('eval'):
         eval_targets = []
         eval_info = []
 
-        json_files = json_path('eval')
+        json_files = json_path(eval_root)
 
         if len(json_files) == 0:
             print("No files to evaluate.")

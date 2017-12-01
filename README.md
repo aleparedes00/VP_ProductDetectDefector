@@ -1,6 +1,6 @@
-# VP_PDD #
+# VP_ProductDefectDetector #
 
-## REQUIREMENTS ## 
+## REQUIREMENTS ##
 *python3*
 *pip3* (python3-pip)
 *numpy*
@@ -15,8 +15,12 @@ _'chmod +x ./main.py'_
     ___
 ## USAGE ##
 - learning :
-    créer un dossier data, model, eval, ajouter les fichier json dans le dossier data
-    lancer le fichier learning.py soit en _'python3 ./learning.py'_ soit _'./learning.py'_
+    Placer les données à apprendre dans le dossier data.
+    Pour tester le modèle, changer la valeur de percentage dans jsonreader.py.
+    Exemples : 0.8 pour un ratio 80% à apprendre, 20% à évaluer ; 0 pour ne rien apprendre et tout évaluer.
+    Pour apprendre tout le contenu de data et sauvegarder le modèle, mettre à 1.
+    Exécuter le fichier learning.py soit en _'python3 ./learning.py'_ soit _'./learning.py'_
 
 - main :
-    lancer le fichier main.py soit en _'python3 ./main.py'_ soit _'./main.py'_
+    Placer les données à évaluer dans le dossier eval.
+    Exécuter le fichier main.py soit en _'python3 ./main.py'_ soit _'./main.py'_

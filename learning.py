@@ -79,6 +79,8 @@ if os.path.isdir(data_root):
     # AP check or create the directory and move processed files
     # into a new folder
     else:
+        if not os.path.exists('model'):
+            os.makedirs('model')
         pickle.dump(features, open('model/features.sav', 'wb'))
         pickle.dump(targets, open('model/targets.sav', 'wb'))
         pickle.dump(class_dict, open('model/class_dict.sav', 'wb'))

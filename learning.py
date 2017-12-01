@@ -19,7 +19,7 @@ eval_info = []
 class_dict = dict()
 
 # Chargement de la liste des nouveaux fichiers référence (dossier data)
-json_files = json_path('data2')
+json_files = json_path('data')
 
 # Parcours des fichiers
 for file in json_files:

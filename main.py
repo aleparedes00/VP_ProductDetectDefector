@@ -3,6 +3,7 @@ from open_json import *
 from jsonreader import *
 from make_dico import *
 import pickle
+import os
 from sklearn import tree
 
 try:
@@ -51,6 +52,7 @@ try:
     if nb_error > 0:
         print("Found " + str(nb_error) + " errors. Check error_log.txt for more info.")
     else:
+        os.remove("error_log.txt")
         print("No error found.")
 
 except FileNotFoundError:

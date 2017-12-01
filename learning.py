@@ -47,23 +47,28 @@ model = model.fit(features, targets)
 
 nb_error = 0
 
+log = open("error_log.txt", "w+", encoding="UTF-8")
+
 # Évaluation des données de test
 for i in range(len(eval_features)):
     answer = model.predict([eval_features[i]])[0]
     check = eval_targets[i]
     if answer != check:
+        log.write("Expected [" + str(answer) + "], found [" + str(check) + "] for product [" + str(
+            eval_info[i]['id']) + " - " + str(eval_info[i]['file']) + "]\n")
         print("Je pense que ce produit a pour catégorie... " + class_dict[answer])
         print("Le produit est en réalité dans la catégorie... " + class_dict[check])
         print("Le objet est l'id =" + eval_info[i]['id'] + "dans le fichier " + eval_info[i]['file'] + "\n")
         print("\033[91mERROR\033[0m\n")
         nb_error = nb_error + 1
+log.close()
 
 # Pourcentage de précision de la machine
 if len(eval_features) > 0:
     raw_precision = ((len(eval_features) - nb_error) / len(eval_features))*100
     precision = format(raw_precision, '.2f')
     print("Le pourcentage de précision est de \033[92m" + str(precision) + "%.\033[0m")
-    print("Nombre d'erreurs : " + str(nb_error) + "\n")
+    print("Nombre d'erreurs : " + str(nb_error) + ".\n")
 
 # Sauvegarde du modèle
 else:

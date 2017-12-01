@@ -1,4 +1,4 @@
-# VP_ProductDetectDefector #
+# VP_PDD #
 
 ## REQUIREMENTS ## 
 *python3*

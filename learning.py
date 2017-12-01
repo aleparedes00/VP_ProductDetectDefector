@@ -74,10 +74,22 @@ if os.path.isdir('data'):
         print("Nombre d'erreurs : " + str(nb_error) + ".\n")
 
     # Sauvegarde du modèle
+    # AP check or create the directory and move processed files
+    # into a new folder
     else:
         pickle.dump(features, open('model/features.sav', 'wb'))
         pickle.dump(targets, open('model/targets.sav', 'wb'))
         pickle.dump(class_dict, open('model/class_dict.sav', 'wb'))
         print("Modèle sauvegardé.")
+        if not os.path.exists('learned'):
+            os.makedirs('learned')
+            pass
+        for file in json_files:
+            os.remane(file, "learned/" + file)
+
 else:
     print("No data directory found.")
+
+
+    ## os.remove(path, *, dir_fd=None)
+##Remove (delete) the file path. If path is a directory, OSError is raised. Use rmdir() to remove directories.

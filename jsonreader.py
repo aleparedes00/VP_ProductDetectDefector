@@ -38,10 +38,11 @@ def uniformise_features(features, eval_features):
 # Retourne un indice aléatoire dans la liste
 def get_value(i, first_line, last_line, added_values):
 
-    # Sans aléatoire (décommenter)
-    # return i
+    # Sans aléatoire si utilisateur final
+    if percentage == 1:
+        return i
 
-    # Valeur aléatoire
+    # Valeur aléatoire si entraînement du modèle
     r = random.randint(first_line, last_line - 1)
     while r in added_values:
         r = random.randint(first_line, last_line - 1)

@@ -11,7 +11,9 @@ from sklearn import tree
 import pickle
 import os
 
-if os.path.isdir('data'):
+data_root = 'data'
+
+if os.path.isdir(data_root):
     try:
         features = pickle.load(open('model/features.sav', 'rb'))
         targets = pickle.load(open('model/targets.sav', 'rb'))
@@ -29,7 +31,7 @@ if os.path.isdir('data'):
     eval_info = []
 
     # Chargement de la liste des nouveaux fichiers référence (dossier data)
-    json_files = json_path('data')
+    json_files = json_path(data_root)
 
     # Parcours des fichiers
     for file in json_files:

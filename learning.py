@@ -85,11 +85,8 @@ if os.path.isdir('data'):
             os.makedirs('learned')
             pass
         for file in json_files:
-            os.remane(file, "learned/" + file)
+            filename = os.path.basename(file)
+            os.rename(file, "learned/" + filename)
 
 else:
     print("No data directory found.")
-
-
-    ## os.remove(path, *, dir_fd=None)
-##Remove (delete) the file path. If path is a directory, OSError is raised. Use rmdir() to remove directories.

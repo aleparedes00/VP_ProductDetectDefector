@@ -9,15 +9,24 @@ from jsonreader import *
 from make_dico import *
 from sklearn import tree
 import pickle
+import os
 
 if os.path.isdir('data'):
+    try:
+        features = pickle.load(open('model/features.sav', 'rb'))
+        targets = pickle.load(open('model/targets.sav', 'rb'))
+        class_dict = pickle.load(open('model/class_dict.sav', 'rb'))
+        pass
+    except:
+        features = []
+        targets = []
+        class_dict = dict()
+        pass
     # initialistion liste de données global
-    features = []
-    targets = []
+    
     eval_features = []
     eval_targets = []
     eval_info = []
-    class_dict = dict()
 
     # Chargement de la liste des nouveaux fichiers référence (dossier data)
     json_files = json_path('data')

@@ -38,13 +38,18 @@ try:
 
     nb_error = 0
 
+    log = open("error_log.txt", "w+", encoding="UTF-8")
+
     # Évaluation des données de test
     for i in range(len(eval_features)):
         answer = model.predict([eval_features[i]])[0]
         check = eval_targets[i]
         if answer != check:
-            print_log(class_dict[answer], class_dict[check], eval_info[i])
+            log.write("Expected [" + str(answer) + "], found [" + str(check) + "] for product [" + str(
+                eval_info[i]['id']) + " - " + str(eval_info[i]['file']) + "]\n")
+#            print_log(class_dict[answer], class_dict[check], eval_info[i])
             nb_error = nb_error + 1
+    log.close()
 
     if nb_error > 0:
         print("Found " + nb_error + " errors. Check error_log.txt for more info.")
